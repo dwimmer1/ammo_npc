@@ -1,12 +1,12 @@
 surface.CreateFont("MainFont", {
-    font = "Comic Sans MS", --  Use the font-name which is shown to you by your operating system Font Viewer, not the file name
+    font = "Comic Sans MS",
     size = 40,
     weight = 500,
 })
 
 include("shared.lua")
 
-local function Draw3DText(pos, ang, scale, text)
+local function Draw3DText(pos, ang, scale)
     local text = "Munitions Händler"
     cam.Start3D2D(pos, ang, scale)
     draw.DrawText(text, "MainFont", 0, 0, Color(255, 250, 250), TEXT_ALIGN_CENTER)
@@ -17,36 +17,51 @@ function ENT:Draw()
     self:DrawModel()
     local mins, maxs = self:GetModelBounds()
     local pos = self:GetPos() + Vector(0, 0, maxs.z + 9) -- x, y, h
-    local ang = Angle(0, SysTime() * 0 % 280, 90) --x
-    ang:RotateAroundAxis(Vector(0, 0, 1), 90)--neigung
-    Draw3DText(pos, ang, 0.2, text, true)
+    local ang = Angle(0, SysTime() * 0 % 280, 90)--x
+    ang:RotateAroundAxis(Vector(0, 0, 1), 90) --neigung
+    Draw3DText(pos, ang, 0.2, text, true)--0,2 zoom
 end
 
-local function myMenu()
---net.Receive("dermastart", function()
+local function myMenu() --Start
+    --net.Receive("dermastart", function()
+    local randyChat = math.random(1, 3)
 
-    local npc_begruesung = {}
-    npc_begruesung[1] = "Was brauchst du?"
-    npc_begruesung[2] = "Kann man helfen?"
-    npc_begruesung[3] = "Pssss. Hier gibts die beste Munition"
-    chat.PlaySound() --Chat tick sound
-    
-    local npc_voice = {}
-    npc_voice[1] = "vo/npc/male01/hi01.wav"
-    npc_voice[2] = "vo/npc/male01/hi02.wav"
+    if randyChat == 1 then
+        chat.AddText(Color(255, 255, 255), "Was brauchst du?")
+        chat.PlaySound() --Chat tick sound
+    else
+        if randyChat == 2 then
+            chat.AddText(Color(255, 255, 255), "Kann man helfen?")
+            chat.PlaySound()
+        else
+            if randyChat == 3 then
+                chat.AddText(Color(255, 255, 255), "Pssss. Hier gibts die beste Munition")
+                chat.PlaySound()
+            else
+                return
+            end
+        end
+    end
+
+    local randyVoice = math.random(1, 2)
+
+    if randyVoice == 1 then
+        surface.PlaySound("vo/npc/male01/hi01.wav")
+    else
+        surface.PlaySound("vo/npc/male01/hi02.wav")
+    end
+
     -- vo/npc/male01/letsgo01.wav"
-    surface.PlaySound(table.Random(npc_voice))
-    chat.AddText(Color(255, 255, 255), table.Random(npc_begruesung))
-    
     local frame = vgui.Create("DFrame")
     frame:SetSize(600, 720)
     frame:Center()
     frame:SetVisible(true)
     frame:MakePopup()
     frame:SetTitle("Munitions Verkäufer")
+
     frame.Paint = function(s, w, h)
         draw.RoundedBox(12, 0, 0, w, h, Color(105, 105, 105, 150)) ---Allgemeines Derma-Menümenü
-        draw.RoundedBox(12, 2, 2, w - 4, h - 4, Color(0, 0, 0, 150)) --das auch nur Außenlinie
+        draw.RoundedBox(12, 2, 2, w - 4, h - 4, Color(0, 0, 0, 150)) --Das auch nur Außenlinie
         draw.RoundedBox(20, 28, 40, 545, 65, Color(192, 192, 192, 100)) --1
         draw.RoundedBox(20, 28, 130, 545, 65, Color(192, 192, 192, 100)) --2
         draw.RoundedBox(20, 28, 220, 545, 65, Color(192, 192, 192, 100)) --3
@@ -115,7 +130,6 @@ local function myMenu()
     info4:SetSize(300, 40)
     info4:SetPos(120, 320)
 
- 
     net.Receive("npc_voice", function(len, ply)
         local npc_voice_2 = {}
         npc_voice_2[1] = "vo/canals/shanty_go_nag03.wav"
@@ -145,4 +159,4 @@ local function myMenu()
     end
 end
 
-usermessage.Hook("Dermastart", myMenu)
+usermessage.Hook("Dermastart", myMenu) 
