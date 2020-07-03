@@ -20,7 +20,7 @@ function ENT:Draw()
     self:DrawModel()
     local mins, maxs = self:GetModelBounds()
     local pos = self:GetPos() + Vector(0, 0, maxs.z + 10) -- x, y, h
-    local ang = Angle(0, 360, 90) 
+    local ang = Angle(0, 180, 90) 
     ang:RotateAroundAxis(Vector(0, 0, 1), 90)-- neigung
     Draw3DText(pos, ang, 0.2, text, false)
     Draw3DText(pos, ang, 0.2, text, true)
