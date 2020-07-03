@@ -6,12 +6,20 @@ surface.CreateFont("MainFont", {
 
 include("shared.lua")
 
+local function Draw3DText(pos, ang, scale, text)
+    local text = "Munitions Händler"
+    cam.Start3D2D(pos, ang, scale)
+    draw.DrawText(text, "MainFont", 0, 0, Color(255, 250, 250), TEXT_ALIGN_CENTER)
+    cam.End3D2D()
+end
+
 function ENT:Draw()
     self:DrawModel()
-    local ang = self:GetAngles()
-    cam.Start3D2D(self:GetPos(), ang, 0.1) -- Für zoom
-    draw.SimpleText("Munitions Händler", "MainFont", 120, -140, Color(230, 255, 255), 1, 1)
-    cam.End3D2D()
+    local mins, maxs = self:GetModelBounds()
+    local pos = self:GetPos() + Vector(0, 0, maxs.z + 9) -- x, y, h
+    local ang = Angle(0, SysTime() * 0 % 280, 90) --x
+    ang:RotateAroundAxis(Vector(0, 0, 1), 90)--neigung
+    Draw3DText(pos, ang, 0.2, text, true)
 end
 
 local function myMenu()
