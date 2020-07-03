@@ -23,12 +23,14 @@ local function myMenu()
     npc_begruesung[2] = "Kann man helfen?"
     npc_begruesung[3] = "Pssss. Hier gibts die beste Munition"
     chat.PlaySound() --Chat tick sound
+    
     local npc_voice = {}
     npc_voice[1] = "vo/npc/male01/hi01.wav"
     npc_voice[2] = "vo/npc/male01/hi02.wav"
     -- vo/npc/male01/letsgo01.wav"
     surface.PlaySound(table.Random(npc_voice))
     chat.AddText(Color(255, 255, 255), table.Random(npc_begruesung))
+    
     local frame = vgui.Create("DFrame")
     frame:SetSize(600, 720)
     frame:Center()
@@ -137,4 +139,4 @@ local function myMenu()
     end
 end
 
-usermessage.Hook("Dermastart", myMenu) --Hook the menu, so we can use it Serverside
+usermessage.Hook("Dermastart", myMenu)
