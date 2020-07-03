@@ -38,13 +38,12 @@ local function myMenu()
     frame:MakePopup()
     frame:SetTitle("Munitions Verkäufer")
     frame.Paint = function(s, w, h)
-
         draw.RoundedBox(12, 0, 0, w, h, Color(105, 105, 105, 150)) ---Allgemeines Derma-Menümenü
         draw.RoundedBox(12, 2, 2, w - 4, h - 4, Color(0, 0, 0, 150)) --das auch nur Außenlinie
-        draw.RoundedBox(20, 28, 40, 545, 65, Color(192, 192, 192, 100)) --Erster Sheet
-        draw.RoundedBox(20, 28, 130, 545, 65, Color(192, 192, 192, 100)) --Zweiter Sheet
-        draw.RoundedBox(20, 28, 220, 545, 65, Color(192, 192, 192, 100)) --dritter sheet
-        draw.RoundedBox(20, 28, 310, 545, 65, Color(192, 192, 192, 100)) --Vierter sheet
+        draw.RoundedBox(20, 28, 40, 545, 65, Color(192, 192, 192, 100)) --1
+        draw.RoundedBox(20, 28, 130, 545, 65, Color(192, 192, 192, 100)) --2
+        draw.RoundedBox(20, 28, 220, 545, 65, Color(192, 192, 192, 100)) --3
+        draw.RoundedBox(20, 28, 310, 545, 65, Color(192, 192, 192, 100)) --4
     end
 
     local Icon1 = vgui.Create("SpawnIcon", frame)
