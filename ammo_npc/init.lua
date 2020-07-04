@@ -42,10 +42,8 @@ end)
 
 net.Receive("buy_smg", function(len, ply)
     if not ply:canAfford(50) then
-        --umsg.Start("npc_voice_error", ply)
         net.Start("npc_voice")
         net.Send(ply)
-        -- umsg.End()
         DarkRP.notify(ply, 1, 4, string.format("Du kannst dir die Munition nicht leisten."))
     else
         ply:addMoney(-50)
