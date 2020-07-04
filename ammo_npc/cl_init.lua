@@ -3,7 +3,6 @@ surface.CreateFont("MainFont", {
     size = 40,
     weight = 500,
 })
-
 include("shared.lua")
 
 local function Draw3DText(pos, ang, scale,text, flipView)
@@ -28,7 +27,6 @@ end
 
 
 local function myMenu() --Start
-    --net.Receive("dermastart", function()
     local randyChat = math.random(1, 3)
 
     if randyChat == 1 then
