@@ -132,7 +132,7 @@ local function myMenu() --Start
     info4:SetFont("MainFont")
     info4:SetSize(300, 40)
     info4:SetPos(120, 320)
-
+    
     net.Receive("npc_voice", function(len, ply)
         local npc_voice_2 = {}
         npc_voice_2[1] = "vo/canals/shanty_go_nag03.wav"
