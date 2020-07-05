@@ -31,7 +31,7 @@ local function myMenu() --Start
 
     if randyChat == 1 then
         chat.AddText(Color(255, 255, 255), "Was brauchst du?")
-        chat.PlaySound() --Chat tick sound
+        chat.PlaySound() 
     else
         if randyChat == 2 then
             chat.AddText(Color(255, 255, 255), "Kann man helfen?")
