@@ -161,5 +161,4 @@ local function myMenu() --Start
         net.SendToServer()
     end
 end
-
 usermessage.Hook("Dermastart", myMenu) 
