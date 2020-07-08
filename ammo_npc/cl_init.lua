@@ -28,17 +28,18 @@ end
 
 local function myMenu() --Start
     local randyChat = math.random(1, 3)
+    local white = Color(255, 255, 255)
 
     if randyChat == 1 then
-        chat.AddText(Color(255, 255, 255), "Was brauchst du?")
+        chat.AddText(white, "Was brauchst du?")
         chat.PlaySound() 
     else
         if randyChat == 2 then
-            chat.AddText(Color(255, 255, 255), "Kann man helfen?")
+            chat.AddText(white, "Kann man helfen?")
             chat.PlaySound()
         else
             if randyChat == 3 then
-                chat.AddText(Color(255, 255, 255), "Pssss. Hier gibts die beste Munition")
+                chat.AddText(white, "Pssss. Hier gibts die beste Munition")
                 chat.PlaySound()
             else
                 return
