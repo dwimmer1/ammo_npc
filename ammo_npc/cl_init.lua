@@ -5,24 +5,18 @@ surface.CreateFont("MainFont", {
 })
 include("shared.lua")
 
-local function Draw3DText(pos, ang, scale,text, flipView)
-    if (flipView) then
-        ang:RotateAroundAxis(Vector(0, 0, 1), 180)
-    end
-    local text = "Munitions Händler"
-    cam.Start3D2D(pos, ang, scale)
-    draw.DrawText(text, "MainFont", 0, 0, Color(255, 250, 250), TEXT_ALIGN_CENTER)
-    cam.End3D2D()
-end
-
 function ENT:Draw()
     self:DrawModel()
-    local mins, maxs = self:GetModelBounds()
-    local pos = self:GetPos() + Vector(0, 0, maxs.z + 10) -- x, y, h
-    local ang = Angle(0, 180, 90) 
-    ang:RotateAroundAxis(Vector(0, 0, 1), 90)-- neigung
-    Draw3DText(pos, ang, 0.2, text, false)
-    Draw3DText(pos, ang, 0.2, text, true)
+    local distance = LocalPlayer():GetPos():Distance(self:GetPos())
+    local displayAng = LocalPlayer():EyeAngles()
+    local displayPos = self:GetPos() + Vector(0, 0, 80)
+    
+    if (IsValid(self) and distance < 400) then
+        cam.Start3D2D(displayPos, Angle(0, displayAng.y - 90, 90), 0.15)
+            draw.SimpleText( "Munitionshändler", "MainFont", 0 , -35, color_white, TEXT_ALIGN_CENTER, TEXT_ALIGN_TOP )
+        cam.End3D2D()
+    end
+    
 end
 
 local function myMenu() --Start
