@@ -25,7 +25,6 @@ function ENT:Draw()
     Draw3DText(pos, ang, 0.2, text, true)
 end
 
-
 local function myMenu() --Start
     local randyChat = math.random(1, 3)
     local white = Color(255, 255, 255)
