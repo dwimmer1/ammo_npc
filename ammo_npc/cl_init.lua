@@ -12,11 +12,10 @@ function ENT:Draw()
     local displayPos = self:GetPos() + Vector(0, 0, 80)
     
     if (IsValid(self) and distance < 400) then
-        cam.Start3D2D(displayPos, Angle(0, displayAng.y - 90, 90), 0.15)
+        cam.Start3D2D(displayPos, Angle(0, displayAng.y - 90, 90), 0.15) -- 90 erste ist damit man es von vorne sieht zweite ist wie es sich um sich dreht
             draw.SimpleText( "Munitionshändler", "MainFont", 0 , -35, color_white, TEXT_ALIGN_CENTER, TEXT_ALIGN_TOP )
         cam.End3D2D()
     end
-    
 end
 
 local function myMenu() --Start
@@ -126,7 +125,7 @@ local function myMenu() --Start
     info4:SetFont("MainFont")
     info4:SetSize(300, 40)
     info4:SetPos(120, 320)
-    
+
     net.Receive("npc_voice", function(len, ply)
         local npc_voice_2 = {}
         npc_voice_2[1] = "vo/canals/shanty_go_nag03.wav"
@@ -136,22 +135,26 @@ local function myMenu() --Start
     end)
 
     function button:OnMousePressed()
-        net.Start("buy_pistol")
+        net.Start("ammo_buy")
+        net.WriteString("pistol")
         net.SendToServer()
     end
 
     function button2:OnMousePressed()
-        net.Start("buy_smg")
+        net.Start("ammo_buy")
+        net.WriteString("smg")
         net.SendToServer()
     end
 
     function button3:OnMousePressed()
-        net.Start("buy_shotgun")
+        net.Start("ammo_buy")
+        net.WriteString("shotgun")
         net.SendToServer()
     end
 
     function button4:OnMousePressed()
-        net.Start("buy_sniper")
+        net.Start("ammo_buy")
+        net.WriteString("sniper")
         net.SendToServer()
     end
 end
