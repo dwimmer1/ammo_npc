@@ -1,8 +1,5 @@
 util.AddNetworkString("npc_voice")
-util.AddNetworkString("buy_pistol")
-util.AddNetworkString("buy_smg")
-util.AddNetworkString("buy_shotgun")
-util.AddNetworkString("buy_sniper")
+util.AddNetworkString("ammo_buy")
 
 AddCSLuaFile("cl_init.lua")
 AddCSLuaFile("shared.lua")
@@ -27,46 +24,50 @@ function ENT:AcceptInput(Name, Activator, Caller)
     end
 end
 
-net.Receive("buy_pistol", function(len, ply)
-    if not ply:canAfford(50) then
-        net.Start("npc_voice")
-        net.Send(ply)
-        DarkRP.notify(ply, 1, 4, string.format("Du kannst dir die Munition nicht leisten."))
-    else
-        ply:addMoney(-50)
-        ply:GiveAmmo(20, "Pistol", false)
-    end
-end)
+net.Receive("ammo_buy", function(len, ply)
+    local str = net.ReadString()
 
-net.Receive("buy_smg", function(len, ply)
-    if not ply:canAfford(50) then
-        net.Start("npc_voice")
-        net.Send(ply)
-        DarkRP.notify(ply, 1, 4, string.format("Du kannst dir die Munition nicht leisten."))
-    else
-        ply:addMoney(-50)
-        ply:GiveAmmo(45, "SMG1", false)
+    if str == "pistol" then
+        if not ply:canAfford(50) then
+            net.Start("npc_voice")
+            net.Send(ply)
+            DarkRP.notify(ply, 1, 4, string.format("Du kannst dir die Munition nicht leisten."))
+        else
+            ply:addMoney(-50)
+            ply:GiveAmmo(20, "Pistol", false)
+        end
     end
-end)
 
-net.Receive("buy_shotgun", function(len, ply)
-    if not ply:canAfford(50) then
-        net.Start("npc_voice")
-        net.Send(ply)
-        DarkRP.notify(ply, 1, 4, string.format("Du kannst dir die Munition nicht leisten."))
-    else
-        ply:addMoney(-50)
-        ply:GiveAmmo(20, "Buckshot", false)
+    if str == "smg" then
+        if not ply:canAfford(50) then
+            net.Start("npc_voice")
+            net.Send(ply)
+            DarkRP.notify(ply, 1, 4, string.format("Du kannst dir die Munition nicht leisten."))
+        else
+            ply:addMoney(-50)
+            ply:GiveAmmo(45, "SMG1", false)
+        end
     end
-end)
 
-net.Receive("buy_sniper", function(len, ply)
-    if not ply:canAfford(50) then
-        net.Start("npc_voice")
-        net.Send(ply)
-        DarkRP.notify(ply, 1, 4, string.format("Du kannst dir die Munition nicht leisten."))
-    else
-        ply:addMoney(-50)
-        ply:GiveAmmo(6, "357", false)
+    if str == "shotgun" then
+        if not ply:canAfford(50) then
+            net.Start("npc_voice")
+            net.Send(ply)
+            DarkRP.notify(ply, 1, 4, string.format("Du kannst dir die Munition nicht leisten."))
+        else
+            ply:addMoney(-50)
+            ply:GiveAmmo(20, "Buckshot", false)
+        end
+    end
+
+    if str == "sniper" then
+        if not ply:canAfford(50) then
+            net.Start("npc_voice")
+            net.Send(ply)
+            DarkRP.notify(ply, 1, 4, string.format("Du kannst dir die Munition nicht leisten."))
+        else
+            ply:addMoney(-50)
+            ply:GiveAmmo(6, "357", false)
+        end
     end
 end)
