@@ -12,7 +12,7 @@ function ENT:Draw()
     local displayPos = self:GetPos() + Vector(0, 0, 80)
     
     if (IsValid(self) and distance < 400) then
-        cam.Start3D2D(displayPos, Angle(0, displayAng.y - 90, 90), 0.15) -- 90 erste ist damit man es von vorne sieht zweite ist wie es sich um sich dreht
+        cam.Start3D2D(displayPos, Angle(0, displayAng.y - 90, 90), 0.15) 
             draw.SimpleText( "Munitionshändler", "MainFont", 0 , -35, color_white, TEXT_ALIGN_CENTER, TEXT_ALIGN_TOP )
         cam.End3D2D()
     end
