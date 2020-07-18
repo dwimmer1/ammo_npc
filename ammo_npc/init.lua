@@ -17,16 +17,16 @@ function ENT:Initialize()
     self.AutomaticFrameAdvance = true
 end
 
-function ENT:AcceptInput(Name, Activator, Caller)
-    if Name == "Use" and Caller:IsPlayer() then
+function ENT:Use(activator, Caller)
+    timer.Simple(0.1, function()
         umsg.Start("Dermastart", Caller)
         umsg.End()
-    end
+    end)
 end
 
 net.Receive("ammo_buy", function(len, ply)
     local str = net.ReadString()
-        
+
     if str == "pistol" then
         if not ply:canAfford(50) then
             net.Start("npc_voice")
@@ -36,9 +36,7 @@ net.Receive("ammo_buy", function(len, ply)
             ply:addMoney(-50)
             ply:GiveAmmo(20, "Pistol", false)
         end
-    end
-
-    if str == "smg" then
+    elseif str == "smg" then
         if not ply:canAfford(50) then
             net.Start("npc_voice")
             net.Send(ply)
@@ -47,9 +45,7 @@ net.Receive("ammo_buy", function(len, ply)
             ply:addMoney(-50)
             ply:GiveAmmo(45, "SMG1", false)
         end
-    end
-
-    if str == "shotgun" then
+    elseif str == "shotgun" then
         if not ply:canAfford(50) then
             net.Start("npc_voice")
             net.Send(ply)
@@ -58,9 +54,7 @@ net.Receive("ammo_buy", function(len, ply)
             ply:addMoney(-50)
             ply:GiveAmmo(20, "Buckshot", false)
         end
-    end
-
-    if str == "sniper" then
+    elseif str == "sniper" then
         if not ply:canAfford(50) then
             net.Start("npc_voice")
             net.Send(ply)
