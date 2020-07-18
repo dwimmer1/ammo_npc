@@ -26,7 +26,7 @@ end
 
 net.Receive("ammo_buy", function(len, ply)
     local str = net.ReadString()
-
+        
     if str == "pistol" then
         if not ply:canAfford(50) then
             net.Start("npc_voice")
