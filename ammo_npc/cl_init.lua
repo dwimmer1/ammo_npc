@@ -125,6 +125,10 @@ local function myMenu() --Start
     info4:SetFont("MainFont")
     info4:SetSize(300, 40)
     info4:SetPos(120, 320)
+    local buttonClose = vgui.Create("DButton", frame)
+    buttonClose:SetText("Close")
+    buttonClose:SetPos(600 - 60, 6)
+    buttonClose:SetSize(50, 30)
 
     net.Receive("npc_voice", function(len, ply)
         local npc_voice_2 = {}
@@ -156,6 +160,10 @@ local function myMenu() --Start
         net.Start("ammo_buy")
         net.WriteString("sniper")
         net.SendToServer()
+    end
+    function buttonClose:OnMousePressed()
+        frame:Close()
+        surface.PlaySound("vo/npc/male01/fantastic01.wav")
     end
 end
 usermessage.Hook("Dermastart", myMenu) 
